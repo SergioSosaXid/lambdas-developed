@@ -1,0 +1,6 @@
+migrationCustom:
+  handler: src/lambdas/triggerscognito/MigrateLogin.migrationCustom
+  events:
+    - cognitoUserPool:
+        pool: us-east-1_wzDC4mEft
+        trigger: UserMigration
