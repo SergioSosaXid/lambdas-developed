@@ -5,5 +5,6 @@
 # creation: Date 8 de Abril del 2021
 #
 #  lambdas
-- '${file(./src/lambdas/programs/programs.serverless.yml)}'
-- '${file(./src/lambdas/chargebacktypes/chargebacktypes.serverless.yml)}'
+# - '${file(./src/lambdas/programs/programs.serverless.yml)}'
+# - '${file(./src/lambdas/chargebacktypes/chargebacktypes.serverless.yml)}'
+- '${file(./src/lambdas/triggerscognito/triggerscognito.serverless.yml)}'
