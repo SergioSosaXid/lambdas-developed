@@ -1,0 +1,12 @@
+#
+# copyright: Palace Resorts
+# description: Configuraciones que se aplican sobre la carpeta del proyecto y normaliza los saltos de linea de cada archivo
+# author: Edder Salim Rosado Lira - Tomas Fernando Cob Cime - Edgar Rene Rodriguez Medina
+# creation: Date 8 de Abril del 2021
+#
+
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Force the following filetypes to have unix eols, so Windows does not break them
+*.* text eol=lf

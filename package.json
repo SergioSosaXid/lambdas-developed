@@ -1,0 +1,47 @@
+{
+  "name": "serverless-tsc-template",
+  "version": "1.0.0",
+  "description": "Serverless Typescript",
+  "main": "serverless.yml",
+  "scripts": {
+    "build-tsc": "tsc --watch",
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fbenitez/serverless-tsc-template.git"
+  },
+  "keywords": [],
+  "author": "Edder Salim Rosado Lira - Tomas Fernando Cob Cime - Edgar Rene Rodriguez Medina",
+  "license": "Palace Resorts",
+  "bugs": {
+    "url": "https://github.com/fbenitez/serverless-tsc-template/issues"
+  },
+  "homepage": "",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "tedious": "^11.0.5",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.18",
+    "@types/node": "^14.14.31",
+    "@types/tedious": "^4.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "aws-sdk": "^2.862.0",
+    "eslint": "^7.21.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
+    "serverless": "^2.28.7",
+    "serverless-offline": "^6.8.0",
+    "serverless-plugin-split-stacks": "^1.11.0",
+    "serverless-plugin-typescript": "^1.1.9",
+    "serverless-prune-plugin": "^1.4.3",
+    "typescript": "^4.2.2"
+  }
+}

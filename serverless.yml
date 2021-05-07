@@ -1,0 +1,46 @@
+#
+# copyright: Palace Resorts
+# description: Archivo de configuracion principal del proyecto
+# author: Edder Salim Rosado Lira - Tomas Fernando Cob Cime - Edgar Rene Rodriguez Medina
+# creation: Date 8 de Abril del 2021
+#
+service: serverless-tsc-template
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: us-west-2
+  stage: dev
+  environment: ${file(env.yml):${self:custom.stage}}
+  logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}
+
+# Lambda functions
+functions:
+  # Archivo de configuración
+  '${file(all.api.serverless.yml)}'
+
+# Plugins de Serverless
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-plugin-split-stacks
+  - serverless-prune-plugin
+
+# Variables custom para serverless
+custom:
+  # Etapa de proyecto
+  stage: '${opt:stage, self:provider.stage}'
+  # Obtiene las variables del archivo env.yml
+  environment: ${file(custom-env.yml):${self:custom.stage}, file(custom-env.yml):default}
+  # Configuración de plugin serverless split stack
+  splitStacks:
+    # nestedStackCount: 4 # Controls the number of created nested stacks
+    perFunction: false
+    perType: true
+    perGroupFunction: false
+  # Purga las versiones de la lambda para retener solo las últimas tres
+  prune:
+    automatic: true
+    number: 3
