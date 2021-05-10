@@ -28,14 +28,13 @@ export class MysqlManager implements IDbConnect {
     return configValues
   }
   getConnectionString(): Dictionary {
-    const configData: Dictionary = this.getConnectionInfo()
+    // const configData: Dictionary = this.getConnectionInfo()
     return {
-      host: configData.DB_SERVER,
-      user: configData.DB_USER,
-      password: configData.DB_PASS,
-      database: configData.DB_NAME,
-      port: configData.DB_PORT,
-      charset: configData.DB_CHARSET
+      host: "tickets.cwiorlydu3pr.us-east-1.rds.amazonaws.com",
+      user: 'admin',
+      password: '123456789',
+      database: 'tickets',
+      port: '3306'
     }
   }
   createConnection(): mysqlConn.Connection {

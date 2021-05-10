@@ -1,82 +1,29 @@
-const questions = [
-    {
-        id:1,
-        question: 'Superheroe mas famoso de ciudad gotica',
-        answer: 'Batman'
-    },
-    {
-        id:2,
-        question: '¿Que dice el primer programa que hacen en programación?',
-        answer: 'Hola Mundo'
-    },
-    {
-        id:3,
-        question: '¿Cuál es el río más largo del mundo?',
-        answer: 'Amazonas'
-    },
-    {
-        id:4,
-        question: '¿Dónde originaron los juegos olímpicos?',
-        answer: 'Grecia'
-    }
-]
+import { DbConstants } from "../../common/db/dbConstants";
+import { enumDB } from "../../common/db/enums";
+import { MysqlManager } from "../../common/db/mysqlManager";
 
 
-const users = [
-    {
-        id: 1,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 2,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 3,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 4,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 5,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 6,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 7,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 8,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 9,
-        email:"sergio.sosa@xid.com.mx"
-    },
-    {
-        id: 10,
-        email:"sergio.sosa@xid.com.mx"
-    }
-]
 
-const VerifyAuth = async (event: any, context: any) => {
-    const resp = questions.find((item) => item.id === event.request.privateChallengeParameters.id);
-    
-    if(!resp) throw new Error("Question not found")
-
-    const {password} = event.request.clientMetadata;
+exports.handler = async (event: any, context: any) => {
+    // const resp = await Questions.findOne({where:{id: event.request.privateChallengeParameters.id}})
+/*    const conection = new MysqlManager(enumDB.im)
     const {email} = event.request.userAttributes;
-    const user = users.find((item) => item.email === email)
-    
-    if(!user) throw new Error("User in database not found")
-    
-    if (resp.answer.toLowerCase() === event.request.challengeAnswer.toLowerCase()) {
+    const {department} = event.request.clientMetadata;
+    const resp = await conection.executeQuery(DbConstants.CONST_DB_USER_DEPARTMENT, [
+        {
+            columnName: 'email',
+            value: email
+        },
+        {
+            columnName: 'department',
+            value: department
+        }
+    ])
+
+    if(resp.length <= 0) throw new Error("Este usuario no esta registrado en el departamento")
+    */
+
+    if (event.request.privateChallengeParameters.password === event.request.challengeAnswer) {
         event.response.answerCorrect = true;
     } else {
         event.response.answerCorrect = false;

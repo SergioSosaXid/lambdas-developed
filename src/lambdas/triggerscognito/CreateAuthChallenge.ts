@@ -1,38 +1,49 @@
-const questions = [
-    {
-        id:1,
-        question: 'Superheroe mas famoso de ciudad gotica',
-        answer: 'Batman'
-    },
-    {
-        id:2,
-        question: '¿Que dice el primer programa que hacen en programación?',
-        answer: 'Hola Mundo'
-    },
-    {
-        id:3,
-        question: '¿Cuál es el río más largo del mundo?',
-        answer: 'Amazonas'
-    },
-    {
-        id:4,
-        question: '¿Dónde originaron los juegos olímpicos?',
-        answer: 'Grecia'
-    }
-]
+import { DbConstants } from "../../common/db/dbConstants";
+import { enumDB } from "../../common/db/enums";
+import { MysqlManager } from "../../common/db/mysqlManager";
 
-
-export const handler = async (event:any, context:any) => {
+exports.handler = async (event: any, context: any) => {
     try {
         if (event.request.challengeName == 'CUSTOM_CHALLENGE') {
-            const indexRand = Math.floor(Math.random() * (questions.length - 0))
-            const resp = questions[indexRand];
+            const conection = new MysqlManager(enumDB.im)
+            const {email} = event.request.userAttributes;
+            const {department} = event.request.clientMetadata;
+            const resp = await conection.executeQuery(DbConstants.CONST_DB_USER_DEPARTMENT, [
+                {
+                    columnName: 'email',
+                    value: email
+                },
+                {
+                    columnName: 'department',
+                    value: department
+                }
+            ])
+        
+            if(resp.length <= 0) throw new Error("Este usuario no esta registrado en el departamento")
+            
+        
+            event.response.challengeMetadata = 'DEPARTMENT_CHALLENGE';
+            context.succeed(event);
+        }else if( event.request.challengeName == 'DEPARTMENT_CHALLENGE' ) {
+            /*            const resp = await Questions.findAll({
+                attributes:['id','question','answer'], 
+                limit: 1,
+                order: db.random()
+            });*/
+
             event.response.publicChallengeParameters = {};
-            event.response.publicChallengeParameters.question = resp.question;
+            // event.response.publicChallengeParameters.question = resp[0].dataValues.question;
+            const {email} = event.request.userAttributes;
+
+            const username = email.split("@")
+            const temporaryPassword = `${username[0]}123`;
+            
             event.response.privateChallengeParameters = {
-                id: resp.id  
+                // id: resp[0].dataValues.id,
+                password: temporaryPassword,
+            //    answer: resp[0].dataValues.answer  
             };
-            event.response.challengeMetadata = 'QUESTION_CHALLENGE';
+            event.response.challengeMetadata = 'PASSWORD_CHALLENGE';
             context.succeed(event);
         }
     } catch (e) {

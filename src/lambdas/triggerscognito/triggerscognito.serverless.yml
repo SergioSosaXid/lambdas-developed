@@ -4,3 +4,9 @@ migrationCustom:
     - cognitoUserPool:
         pool: us-east-1_wzDC4mEft
         trigger: UserMigration
+CreateAuthLambdaChallenge:
+  handler: src/lambdas/triggerscognito/CreateAuthChallenge.handler
+DefineLambdaChallenge:
+  handler: src/lambdas/triggerscognito/DefineAuthChallenge.DefineAuthChallenge
+VerifyLambdaChallenge:
+  handler: src/lambdas/triggerscognito/VerifyAuthChallenge.handler
