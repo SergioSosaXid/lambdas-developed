@@ -4,15 +4,15 @@
 # author: Edder Salim Rosado Lira - Tomas Fernando Cob Cime - Edgar Rene Rodriguez Medina
 # creation: Date 8 de Abril del 2021
 #
-service: serverless-tsc-template
+service: serverless-rrb-cognito
 frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
-  region: us-west-2
-  profile: amplify-sergio-count
+  region: us-east-1
+  profile: default
   stage: dev
   environment: ${file(env.yml):${self:custom.stage}}
   logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}

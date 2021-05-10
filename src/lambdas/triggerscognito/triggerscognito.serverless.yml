@@ -1,12 +1,20 @@
 migrationCustom:
   handler: src/lambdas/triggerscognito/MigrateLogin.migrationCustom
-  events:
-    - cognitoUserPool:
-        pool: us-east-1_wzDC4mEft
-        trigger: UserMigration
 CreateAuthLambdaChallenge:
   handler: src/lambdas/triggerscognito/CreateAuthChallenge.handler
+  events:
+    - cognitoUserPool:
+        pool: us-east-1_279gVN8yv
+        trigger: CreateAuthChallenge
 DefineLambdaChallenge:
   handler: src/lambdas/triggerscognito/DefineAuthChallenge.DefineAuthChallenge
+  events:
+    - cognitoUserPool:
+        pool: us-east-1_279gVN8yv
+        trigger: DefineAuthChallenge
 VerifyLambdaChallenge:
   handler: src/lambdas/triggerscognito/VerifyAuthChallenge.handler
+  events:
+    - cognitoUserPool:
+        pool: us-east-1_279gVN8yv
+        trigger: VerifyAuthChallengeResponse
