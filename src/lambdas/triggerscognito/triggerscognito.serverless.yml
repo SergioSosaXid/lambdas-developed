@@ -19,4 +19,4 @@ VerifyLambdaChallenge:
         pool: us-east-1_279gVN8yv
         trigger: VerifyAuthChallengeResponse
   layers:
-    - arn:aws:lambda:us-east-1:642537107330:layer:CommonPalace:2
+    - arn:aws:lambda:us-east-1:642537107330:layer:CommonPalace:15

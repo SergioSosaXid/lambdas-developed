@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-    "preserveConstEnums": true,
-    "strictNullChecks": true,
-    "sourceMap": true,
-    "allowJs": true,
-    "target": "es5",
-    "outDir": ".build",
-    "moduleResolution": "node",
+    "lib": ["es2017"],
+    "module": "commonjs",
     "esModuleInterop": true,
-    "lib": ["es2015"],
-    "rootDir": "./",
-    "strict": true,
-    "removeComments": true,
-    "watch": true
-  }
+    "moduleResolution": "node",
+    "sourceMap": true,
+    //"rootDir": "./",
+    "outDir": ".build",
+    "target": "es2017",
+    "declaration": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": []
 }

@@ -22,7 +22,7 @@
   "homepage": "",
   "dependencies": {},
   "devDependencies": {
-    "common-palace": "file:../lambda-layer/common-palace/nodejs/node_modules/common-palace",
+    "common-palace": "git+https://github.com/RodolfoXID/common-palace.git",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "aws-sdk": "^2.862.0",

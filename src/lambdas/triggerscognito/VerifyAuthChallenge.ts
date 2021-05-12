@@ -1,4 +1,4 @@
-import { MysqlManager, enumDB } from "common-palace/dist";
+import { MysqlManager, enumDB } from "common-palace";
 
 exports.handler = async (event: any, context: any) => {
     console.log('valid password chanllenge');

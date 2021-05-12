@@ -18,10 +18,8 @@ provider:
   logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}
 
 package:
-  individually: true
   patterns:
     - '!node_modules/**'
-    - 'node_modules/node-fetch/**'
     - '!tmp/**'
     - '!.git/**'
 
