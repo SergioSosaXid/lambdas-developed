@@ -17,5 +17,6 @@ export enum enumConfigSource {
 
 export enum enumDB {
   im = 'IM',
-  chb = 'CHB'
+  chb = 'CHB',
+  ticket = 'tickets'
 }

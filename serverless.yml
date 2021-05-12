@@ -11,8 +11,8 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
-  region: us-west-2
-  profile: amplify-sergio-count
+  region: us-east-1
+  # profile: amplify-sergio-count
   stage: dev
   environment: ${file(env.yml):${self:custom.stage}}
   logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}

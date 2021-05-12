@@ -11,5 +11,5 @@ export namespace DbConstants {
   // imchargebacks_qa DB
   export const CONST_DB_ALL_CHBTYPES: string = 'SELECT * FROM ChargebackTypes'
   export const CONST_DB_CHBTYPE_BY_ID: string = 'SELECT * FROM ChargebackTypes WHERE chtID = @chtID'
-  export const CONST_DB_USER_DEPARTMENT: string = 'SELECT * FROM vuser_complete WHERE email = @email AND department_name = @department'
+  export const CONST_DB_USER_DEPARTMENT: string = 'SELECT email FROM v_user_complete WHERE email = @email'
 }

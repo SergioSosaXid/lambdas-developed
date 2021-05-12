@@ -18,16 +18,15 @@ export const DefineAuthChallenge = async (event: any, context: any) => {
         event.request.session.length &&
         event.request.session.slice(-1)[0].challengeName === 'CUSTOM_CHALLENGE' && // Doubly stitched, holds better
         event.request.session.slice(-1)[0].challengeResult === true) {
-        // The user provided the right answer; succeed auth
-        event.response.issueTokens = true;
-        event.response.failAuthentication = false;
+            event.response.issueTokens = true;
+            event.response.failAuthentication = false;
+          //  event.response.challengeName = 'PASSWORD_CHALLENGE'
     } else if (event.request.session &&
         event.request.session.length &&
-        event.request.session.slice(-1)[0].challengeName === 'DEPARTMENT_CHALLENGE' && // Doubly stitched, holds better
+        event.request.session.slice(-1)[0].challengeName === 'PASSWORD_CHALLENGE' && // Doubly stitched, holds better
         event.request.session.slice(-1)[0].challengeResult === true) {
-        // The user provided the right answer; succeed auth
-        event.response.issueTokens = true;
-        event.response.failAuthentication = false;
+            event.response.issueTokens = true;
+            event.response.failAuthentication = false;
     } else {
         // The user did not provide a correct answer yet; present challenge
         event.response.issueTokens = false;

@@ -35,6 +35,7 @@ export class DbConfig {
     const envManager: EnviromentManager = new EnviromentManager()
     const dict: string = envManager.getValue('DB_CONFIG')
     const dcode: string = this.decodeConfigFromB64(dict)
+    console.log(dcode)
     return JSON.parse(dcode).dbConfig[key]
   }
 
