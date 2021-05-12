@@ -1,8 +1,7 @@
-import { User } from "../../common/model/entities";
 import { Users } from "../../mocks/users.db";
 
-function getUserByUsernameAndPassword(user: string, password: string): Promise<User> {
-    let promise = new Promise<User>((resolve, reject) => {
+function getUserByUsernameAndPassword(user: string, password: string): Promise<any> {
+    let promise = new Promise<any>((resolve, reject) => {
         try {
             let userResult: any = Users.find(f => f.email == user && f.password == password);
             userResult.password = undefined;
@@ -15,8 +14,8 @@ function getUserByUsernameAndPassword(user: string, password: string): Promise<U
     return promise;
 }
 
-function getUserByUsername(user: string): Promise<User> {
-    let promise = new Promise<User>((resolve, reject) => {
+function getUserByUsername(user: string): Promise<any> {
+    let promise = new Promise<any>((resolve, reject) => {
         try {
             let userResult: any = Users.map(m => { return { email: m.email }; }).find(f => f.email == user);
             resolve(userResult);
@@ -31,11 +30,11 @@ function getUserByUsername(user: string): Promise<User> {
 
 export class UserService {
     public async authenticateUser(user: string, password: string) {
-        let userResult: User = await getUserByUsernameAndPassword(user, password);
+        let userResult: any = await getUserByUsernameAndPassword(user, password);
         return userResult;
     }
     public async lookupUser(user: string) {
-        let userResult: User = await getUserByUsername(user);
+        let userResult: any = await getUserByUsername(user);
         return userResult;
     }
 };

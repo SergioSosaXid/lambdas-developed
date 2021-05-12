@@ -17,6 +17,14 @@ provider:
   environment: ${file(env.yml):${self:custom.stage}}
   logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}
 
+package:
+  individually: true
+  patterns:
+    - '!node_modules/**'
+    - 'node_modules/node-fetch/**'
+    - '!tmp/**'
+    - '!.git/**'
+
 # Lambda functions
 functions:
   # Archivo de configuración

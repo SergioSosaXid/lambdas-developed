@@ -1,6 +1,4 @@
-import { DbConstants } from "../../common/db/dbConstants";
-import { enumDB } from "../../common/db/enums";
-import { MysqlManager } from "../../common/db/mysqlManager";
+import { MysqlManager, enumDB } from "common-palace/dist";
 
 exports.handler = async (event: any, context: any) => {
     console.log('valid password chanllenge');
@@ -10,7 +8,7 @@ exports.handler = async (event: any, context: any) => {
         const conection = new MysqlManager(enumDB.im)
         const {email} = event.request.userAttributes;
         const {department} = event.request.clientMetadata;
-        const resp = await conection.executeQuery(DbConstants.CONST_DB_USER_DEPARTMENT, [
+        const resp = await conection.executeQuery('SELECT * FROM v_user_complete WHERE email = @email AND department_name = @department', [
             {
                 columnName: 'email',
                 value: email
