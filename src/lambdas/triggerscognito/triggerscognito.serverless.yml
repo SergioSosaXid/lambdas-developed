@@ -10,3 +10,5 @@ DefineLambdaChallenge:
   handler: src/lambdas/triggerscognito/DefineAuthChallenge.DefineAuthChallenge
 VerifyLambdaChallenge:
   handler: src/lambdas/triggerscognito/VerifyAuthChallenge.handler
+  layers:
+    - {Ref: BasicLayerLambdaLayer}

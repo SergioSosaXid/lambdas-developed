@@ -14,3 +14,5 @@ functionTest:
         path: api/test
         method: post
         cors: true
+  layers:
+    - {Ref: BasicLayerLambdaLayer}

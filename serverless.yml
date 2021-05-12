@@ -17,6 +17,20 @@ provider:
   environment: ${file(env.yml):${self:custom.stage}}
   logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}
 
+package:
+  individually: true
+  excludeDevDependencies: true
+  exclude:
+  - ./package.json
+  - ./package-lock.json
+  - ./node_modules/**
+  - ./layers/**
+
+layers: 
+  BasicLayer:
+    package:
+      artifact: ./layers/BasicLayer.zip
+  
 # Lambda functions
 functions:
   # Archivo de configuración
