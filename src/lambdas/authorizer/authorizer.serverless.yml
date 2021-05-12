@@ -1,0 +1,2 @@
+authorizerFunc:
+  handler: src/lambdas/authorizer/handler.authorizer
