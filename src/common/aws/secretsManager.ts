@@ -13,7 +13,7 @@ import winston from 'winston'
 export class SecretManager {
   private _client: AWS.SecretsManager
   private _region: string = 'us-east-1'
-  private _secretName: string = 'secretname'
+  private _secretName: string = 'prod/ticketDb'
   private _secret: string = ''
   private _decodedBinarySecret: string = ''
 

@@ -1,41 +1,20 @@
-const questions = [
-    {
-        id:1,
-        question: 'Superheroe mas famoso de ciudad gotica',
-        answer: 'Batman'
-    },
-    {
-        id:2,
-        question: '¿Que dice el primer programa que hacen en programación?',
-        answer: 'Hola Mundo'
-    },
-    {
-        id:3,
-        question: '¿Cuál es el río más largo del mundo?',
-        answer: 'Amazonas'
-    },
-    {
-        id:4,
-        question: '¿Dónde originaron los juegos olímpicos?',
-        answer: 'Grecia'
-    }
-]
-
-
-export const handler = async (event:any, context:any) => {
+exports.handler = async (event: any, context:any) => {
     try {
         if (event.request.challengeName == 'CUSTOM_CHALLENGE') {
-            const indexRand = Math.floor(Math.random() * (questions.length - 0))
-            const resp = questions[indexRand];
             event.response.publicChallengeParameters = {};
-            event.response.publicChallengeParameters.question = resp.question;
+            const {email} = event.request.userAttributes;
+            const username = email.split("@")
+            const temporaryPassword = `${username[0]}123`;
             event.response.privateChallengeParameters = {
-                id: resp.id  
+                password: temporaryPassword,
             };
-            event.response.challengeMetadata = 'QUESTION_CHALLENGE';
+            event.response.challengeMetadata = 'PASSWORD_CHALLENGE';
             context.succeed(event);
+        } else if(event.request.challengeName == 'PASSWORD_CHALLENGE') {
+            
         }
     } catch (e) {
+        console.log(e)
         throw new Error("Error en esta seccion")
     }
 }

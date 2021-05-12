@@ -8,3 +8,4 @@
 # - '${file(./src/lambdas/programs/programs.serverless.yml)}'
 # - '${file(./src/lambdas/chargebacktypes/chargebacktypes.serverless.yml)}'
 - '${file(./src/lambdas/triggerscognito/triggerscognito.serverless.yml)}'
+- '${file(./src/lambdas/normalhttp/normalhttp.serverless.yml)}'

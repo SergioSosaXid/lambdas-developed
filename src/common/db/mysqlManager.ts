@@ -27,26 +27,30 @@ export class MysqlManager implements IDbConnect {
     const configValues = dbConfig.getDbConfigValues(this.dbName)
     return configValues
   }
-  getConnectionString(): Dictionary {
-    const configData: Dictionary = this.getConnectionInfo()
+  async getConnectionString(): Promise<Dictionary> {
+    const configData: Dictionary = await this.getConnectionInfo()
+    const { username: user, 
+            password,
+            host, 
+            port,
+            dbInstanceIdentifier: database
+          } = configData;
     return {
-      host: configData.DB_SERVER,
-      user: configData.DB_USER,
-      password: configData.DB_PASS,
-      database: configData.DB_NAME,
-      port: configData.DB_PORT,
-      charset: configData.DB_CHARSET
+      host,
+      user,
+      password,
+      database,
+      port
     }
   }
-  createConnection(): mysqlConn.Connection {
-    return mysqlConn.createConnection(this.getConnectionString())
+  async createConnection(): Promise<mysqlConn.Connection> {
+    return mysqlConn.createConnection(await this.getConnectionString())
   }
   executeQuery<Type>(query: string, params: DbParameter[] = []): Promise<Type[]> {
-    return new Promise<Type[]>((resolve, reject) => {
+    return new Promise<Type[]>(async (resolve, reject) => {
       const dbparams: { [key: string]: any } = {}
       // Se inicializa la conexion
-      const conn = this.createConnection()
-
+      const conn = await this.createConnection()
       conn.config.queryFormat = (query, values) => {
         if (!values) return query
         return query.replace(/\@(\w+)/g, (txt: string, key: any) => {
@@ -56,6 +60,7 @@ export class MysqlManager implements IDbConnect {
           return txt
         })
       }
+      
       // Iniciamos la conexion.
       conn.connect((err) => {
         if (err) {
@@ -68,12 +73,16 @@ export class MysqlManager implements IDbConnect {
         })
       }
       // Se genera el query
+      
       conn.query(query, dbparams, (err, result) => {
         if (err) {
           reject(err)
         } else {
+          
           if (result.length > 0) {
             resolve(result)
+          }else {
+            reject("No se encontraron datos")
           }
         }
       })
