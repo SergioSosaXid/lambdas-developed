@@ -10,7 +10,6 @@ default_env: &default_env # Días que se retiene el log en CloudWatch
 # Dev stage
 dev:
   <<: *default_env
-
   # Tags de lambdas - Se agregan a todas las lambdas
   LAMBDA_TAGS_LIST:
     Enterprise: Palace Resorts

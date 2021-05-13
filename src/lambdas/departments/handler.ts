@@ -5,8 +5,6 @@ import { errorConstants } from "../../common/helpers/errorConstants";
 
 export async function getDepartments(event:any, context:any): Promise<CommonResponse> {
     
-    console.log(event);
-
     //variables
     const responseManager = new ResponseManager()
     const departmentManager = new DepartmentManager();

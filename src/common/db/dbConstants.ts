@@ -12,6 +12,7 @@ export namespace DbConstants {
   export const CONST_DB_ALL_CHBTYPES: string = 'SELECT * FROM ChargebackTypes'
   export const CONST_DB_CHBTYPE_BY_ID: string = 'SELECT * FROM ChargebackTypes WHERE chtID = @chtID'
   export const CONST_DB_USER_DEPARTMENT: string = 'SELECT email FROM v_user_complete WHERE email = @email'
+  export const CONST_DB_USER_TOKEN_INFORMATION: string = 'SELECT email, roles_name, department_name FROM v_user_complete WHERE email = @email'
 
   //departments querys
   export const CONST_DB_DEPARTMENTS_ALL: string = 'SELECT name FROM departamento LIMIT 5'

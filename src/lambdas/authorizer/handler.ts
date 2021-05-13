@@ -9,11 +9,10 @@ export async  function authorizer(event:any, context:any, callback:any) {
     const policyIamManager = new PolicyIamManager();
     const responseManager = new ResponseManager();
 
-    console.log("<==========================================")
     const token = await  authorizerMagager.getToken(event.authorizationToken.split(" ")[1]);
     
-    console.log("==========================================>")
     if(!token.isValid) return  responseManager.handleError(errorConstants.UNAUTHORIZED)
+    console.log(token)
     const query = await authorizerMagager.getPermissionByEmail(token.email);
     const role = query ? query.roles_name: "unauthorized";
     switch (role) {

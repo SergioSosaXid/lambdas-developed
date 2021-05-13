@@ -2,13 +2,25 @@ migrationCustom:
   handler: src/lambdas/triggerscognito/MigrateLogin.migrationCustom
   events:
     - cognitoUserPool:
-        pool: us-east-1_wzDC4mEft
+        pool: ${self:provider.environment.cognito}
         trigger: UserMigration
 CreateAuthLambdaChallenge:
   handler: src/lambdas/triggerscognito/CreateAuthChallenge.handler
 DefineLambdaChallenge:
   handler: src/lambdas/triggerscognito/DefineAuthChallenge.DefineAuthChallenge
+  events:
+    - cognitoUserPool:
+        pool: ${self:provider.environment.cognito}
+        trigger: DefineAuthChallenge
 VerifyLambdaChallenge:
   handler: src/lambdas/triggerscognito/VerifyAuthChallenge.handler
+  layers:
+    - {Ref: BasicLayerLambdaLayer}
+PreTokenAuth:
+  handler: src/lambdas/triggerscognito/PreTokenAuth.handler
+  events:
+    - cognitoUserPool:
+        pool: ${self:provider.environment.cognito}
+        trigger: PreTokenGeneration
   layers:
     - {Ref: BasicLayerLambdaLayer}
