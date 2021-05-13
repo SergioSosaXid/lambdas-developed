@@ -6,4 +6,5 @@
  */
 export namespace errorConstants {
   export const UNEXPECTED_ERROR: string = 'UNEXPECTED_ERROR'
+  export const UNAUTHORIZED: string = 'Unauthorized'
 }
