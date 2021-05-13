@@ -1,0 +1,31 @@
+
+
+get-departments:
+  handler: src/lambdas/departments/handler.getDepartments
+  name: ${self:service}-${self:provider.stage}-client-get-departments
+  description: Método demo para pruebas de template.
+  tags: ${self:custom.environment.LAMBDA_TAGS_LIST}
+  events:
+    - http:
+        path: api/departments
+        method: get
+        authorizer: authorizerFunc
+        cors: true
+        # authorizer:
+        #     type: COGNITO_USER_POOLS
+        #     authorizerId:
+        #       Ref: ApiGatewayAuthorizer
+        # cors:
+        #   origin: 'http://localhost:3000'
+        #   headers:
+        #     - Content-Type
+        #     - X-Amz-Date
+        #     - Authorization
+        #     - X-Api-Key
+        #     - X-Amz-Security-Token
+        #     - X-Amz-User-Agent
+        #   allowCredentials: true
+  layers:
+    - {Ref: BasicLayerLambdaLayer}
+
+  

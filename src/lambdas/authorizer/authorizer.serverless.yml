@@ -1,0 +1,4 @@
+authorizerFunc:
+  handler: src/lambdas/authorizer/handler.authorizer
+  layers:
+    - {Ref: BasicLayerLambdaLayer}

@@ -1,0 +1,27 @@
+{
+    "name": "layers",
+    "version": "4.0.0",
+    "description": "",
+    "main": "common-palace/nodejs/node_modules/common-palace/dist/index.js",
+    "author": "XID",
+    "license": "ISC",
+    "scripts": {
+        "compile": "tsc"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.16.1",
+        "@typescript-eslint/parser": "^4.16.1",
+        "eslint": "^7.21.0",
+        "eslint-config-google": "^0.14.0",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "prettier": "^2.2.1",
+        "serverless": "^2.28.7",
+        "serverless-offline": "^6.8.0",
+        "serverless-plugin-split-stacks": "^1.11.0",
+        "serverless-plugin-typescript": "^1.1.9",
+        "serverless-prune-plugin": "^1.4.3",
+        "typescript": "^4.2.2"
+    }
+}

@@ -7,3 +7,4 @@
 export type ChargebackType = { [key: string]: any }
 export type Program = { [key: string]: any }
 export type User = { [key: string]: any }
+export type Department = { [key: string]: any }

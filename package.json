@@ -21,11 +21,15 @@
   },
   "homepage": "",
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.5",
     "mysql": "^2.18.1",
     "tedious": "^11.0.5",
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.1",
+    "@types/jwk-to-pem": "^2.0.0",
     "@types/mysql": "^2.15.18",
     "@types/node": "^14.14.31",
     "@types/tedious": "^4.0.3",
