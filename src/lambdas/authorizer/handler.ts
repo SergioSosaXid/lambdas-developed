@@ -1,33 +1,33 @@
-import { PolicyIamManager } from "../../common/helpers/PolicyIamManager";
-import { AuthorizerManager } from "../authorizer/manager"
-import  { isObjEmpty } from "../../common/helpers/objectManager"
+import { TokenRole } from "../../common/model/tokenRole"
+import { MysqlManager } from "../../common/db/mysqlManager";
+import { enumDB } from "../../common/db/enums";
+import { DbParameter } from "../../common/model/dbParameter";
+import { DbConstants } from "../../common/db/dbConstants";
+import { User } from "../../common/model/entities";
+import { handler } from "../../common/helpers/verifyJWTManager"
 
-import { ResponseManager} from '../../common/helpers/responseManager'
+export class AuthorizerManager {
 
+    /**
+     * @return {Promise<>}
+     */
+async getToken(token:any): Promise<TokenRole> {
+    const resp = await handler({token});
+    return resp;
+    }
 
-const responseManager = new ResponseManager()
-export async  function authorizer(event:any, context:any, callback:any) {
-
-    const authorizerMagager = new AuthorizerManager()
-    const policyIamManager = new PolicyIamManager();
-
-    const token = await  authorizerMagager.getToken(event.authorizationToken.split(" ")[1]);
-    if(isObjEmpty(token)) return  callback("Unauthorized")
-    const query = await authorizerMagager.getPermissionByEmail(token.email);
-    const role = query ? query.roles_name: "unauthorized";
-
-    switch (role) {
-        case 'ADMIN':
-            callback(null, policyIamManager.getPolicy('user', "Allow", event.methodArn));
-            break;
-        case 'CUSTOMER':
-            callback(null, policyIamManager.getPolicy('user', "Deny", event.methodArn));
-            break;
-        case 'unauthorized':
-            return responseManager.handleError("Sin autorización")
-        default:
-            callback("Error: Invalid token"); // Return a 500 Invalid token response
-    } 
-          
-   
-};
+    /**
+   *
+   * @param {string} pgEmail
+   * @return {Promise<object[] | undefined>}
+   */
+    async getPermissionByEmail(pgEmail : string): Promise<User> {
+        //Se inicia el manejador de BD
+        const mysqlManager = new MysqlManager(enumDB.im);
+        const params: DbParameter[] = [];
+        params.push({columnName: 'pgEmail', value: pgEmail});
+        //Se ejecuta el query
+        const result:User[] = await mysqlManager.executeQuery<User>(DbConstants.CONST_DB_VUSER_PERMISSIONS_BY_EMAIL, params)
+        return result ? result[0] : {};
+    }
+}
