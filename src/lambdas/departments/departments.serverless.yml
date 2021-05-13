@@ -10,6 +10,7 @@ get-departments:
         path: api/departments
         method: get
         authorizer: authorizerFunc
+        cors: true
         # authorizer:
         #     type: COGNITO_USER_POOLS
         #     authorizerId:
@@ -24,5 +25,7 @@ get-departments:
         #     - X-Amz-Security-Token
         #     - X-Amz-User-Agent
         #   allowCredentials: true
+  layers:
+    - {Ref: BasicLayerLambdaLayer}
 
   

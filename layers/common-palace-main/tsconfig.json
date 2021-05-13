@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": ["es2017"],
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    //"rootDir": "./",
+    "outDir": "common-palace/nodejs/node_modules/common-palace/dist/.",
+    "target": "es2017",
+    "declaration": true
+  },
+  "include": ["common-palace/nodejs/node_modules/common-palace/src/**/*.ts"],
+  "exclude": []
+}

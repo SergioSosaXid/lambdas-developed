@@ -1,0 +1,18 @@
+#
+# copyright: Palace Resorts
+# description: Archivo que contiene las variables de entorno del modulo custom para heredar en archivos yaml
+# author: Edder Salim Rosado Lira - Tomas Fernando Cob Cime - Edgar Rene Rodriguez Medina
+# creation: Date 8 de Abril del 2021
+#
+# Variables que se heredan en todas las etapas
+default_env: &default_env # Días que se retiene el log en CloudWatch
+  LOG_RETENTION_IN_DAYS: 30
+# Dev stage
+dev:
+  <<: *default_env
+
+  # Tags de lambdas - Se agregan a todas las lambdas
+  LAMBDA_TAGS_LIST:
+    Enterprise: Palace Resorts
+    Project: '${opt:stage, self:service}'
+    Area: IT-DevOps

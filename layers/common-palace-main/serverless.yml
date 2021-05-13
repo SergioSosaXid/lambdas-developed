@@ -4,46 +4,38 @@
 # author: Edder Salim Rosado Lira - Tomas Fernando Cob Cime - Edgar Rene Rodriguez Medina
 # creation: Date 8 de Abril del 2021
 #
-service: serverless-tsc-template
+service: serverless-rrb-cognito-layer
 frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: nodejs12.x
-  lambdaHashingVersion: 20201221
   region: us-east-1
-  # profile: amplify-sergio-count
+  profile: default
   stage: dev
   environment: ${file(env.yml):${self:custom.stage}}
-  logRetentionInDays: ${self:custom.environment.LOG_RETENTION_IN_DAYS}
 
 package:
-  individually: true
   excludeDevDependencies: true
-  exclude:
-  - ./package.json
-  - ./package-lock.json
-  - ./node_modules/**
-  - ./layers/**
+  patterns:
+    - '!tmp/**'
+    - '!.git/**'
 
-layers: 
-  BasicLayer:
-    package:
-      artifact: ./layers/BasicLayer.zip
-  CommonPalaceMain:
-    package:
-      artifact: ./layers/common-palace-main.zip
-  
-# Lambda functions
-functions:
-  # Archivo de configuración
-  '${file(all.api.serverless.yml)}'
+layers:
+  CommonPalace:
+    path: common-palace
+    name: CommonPalace
 
+resources:
+  Outputs:
+    CommonPalaceLayerExport:
+      Value:
+        Ref: CommonPalaceLambdaLayer
+      Export:
+        Name: CommonPalaceLambdaLayer
 
 # Plugins de Serverless
 plugins:
-  - serverless-plugin-typescript
-  - serverless-offline
   - serverless-plugin-split-stacks
   - serverless-prune-plugin
 

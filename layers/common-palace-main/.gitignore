@@ -1,0 +1,25 @@
+#
+# copyright: Palace Resorts
+# description: Configuracion de archivos que se excluyen del repositorio
+# author: Edder Salim Rosado Lira - Tomas Fernando Cob Cime - Edgar Rene Rodriguez Medina
+# creation: Date 8 de Abril del 2021
+#
+
+# files
+secrets.dev.yml
+dbconfigs.json
+
+# package directories
+/node_modules
+/common-palace/nodejs/node_modules/common-palace/node_modules
+jspm_packages
+layer
+
+# Serverless directories
+.serverless
+.vscode
+
+# NodeJS directories
+.build
+
+package-lock.json
