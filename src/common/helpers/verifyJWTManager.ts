@@ -5,11 +5,12 @@ const jwkToPem = require('jwk-to-pem');
 
 export interface ClaimVerifyRequest {
   readonly token?: string;
+  readonly publicKey: any;
 }
 
 export interface ClaimVerifyResult {
   readonly userName?: string;
-  readonly email?: string;
+  readonly email: string;
   readonly clientId?: string;
   readonly roles?: string;
   readonly isValid: boolean;
@@ -77,10 +78,13 @@ const getPublicKeys = async (): Promise<MapOfKidToPublicKey> => {
   }
 };
 
+//const verifyPromised = promisify(jsonwebtoken.verify.bind(jsonwebtoken));
+
 function verifyPromised(token: any, pem: any){
   return new Promise(async(resolve, reject) => {
       try {
         const resp = await jsonwebtoken.verify(token, pem);
+        console.log(resp)
         resolve(resp)
       } catch (error) {
         reject({})
@@ -89,7 +93,7 @@ function verifyPromised(token: any, pem: any){
   })
 }
 
-const handler = async (request: ClaimVerifyRequest): Promise<ClaimVerifyResult> => {
+const validateToken = async (request: ClaimVerifyRequest): Promise<ClaimVerifyResult> => {
   let result: ClaimVerifyResult;
   try {
     console.log(`user claim verify invoked for ${JSON.stringify(request)}`);
@@ -100,7 +104,7 @@ const handler = async (request: ClaimVerifyRequest): Promise<ClaimVerifyResult> 
     }
     const headerJSON = Buffer.from(tokenSections[0], 'base64').toString('utf8');
     const header = JSON.parse(headerJSON) as TokenHeader;
-    const keys = await getPublicKeys();
+     const keys = request.publicKey;
     const key = keys[header.kid];
     if (key === undefined) {
       throw new Error('claim made for unknown kid');
@@ -119,10 +123,9 @@ const handler = async (request: ClaimVerifyRequest): Promise<ClaimVerifyResult> 
     }
     result = {userName: claim['cognito:username'], email: claim.email, isValid: true};
   } catch (error) {
-    result = {error: error.message, isValid: false};
+    result = {error: error.message, email: "", isValid: false};
   }
   return result;
 };
 
-export {handler};
-
+export {validateToken, getPublicKeys};
