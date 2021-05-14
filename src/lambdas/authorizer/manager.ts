@@ -9,14 +9,6 @@ import { handler } from "../../common/helpers/verifyJWTManager"
 export class AuthorizerManager {
 
     /**
-     * @return {Promise<>}
-     */
-async getToken(token:any): Promise<TokenRole> {
-    const resp = await handler({token});
-    return resp;
-    }
-
-    /**
    *
    * @param {string} pgEmail
    * @return {Promise<object[] | undefined>}
